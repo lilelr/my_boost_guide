@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/yuxiao/ClionProjects/my_boost_guide/main.cpp
+iostream
+-
+boost/version.hpp
+-
+boost/config.hpp
+-
+
