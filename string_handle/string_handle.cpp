@@ -22,7 +22,7 @@ class demo_class{
 };
 int main()
 {
-  int x = lexical_cast<int>("11");
+    int x = lexical_cast<int>("11");
     string str = lexical_cast<string>(456);
 
 //    try {
