@@ -11,6 +11,7 @@ using namespace std;
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <boost/utility/string_ref.hpp>
+#include <boost/tokenizer.hpp>
 using namespace boost::timer;
 using namespace boost;
 
@@ -20,6 +21,16 @@ class demo_class{
         os<< "demo_class's Name";
     }
 };
+
+template <typename T>
+void my_print(T& tok){
+    for(auto& x: tok){
+        cout<<"["<<x<<"]";
+        cout<<endl;
+    }
+
+}
+
 int main()
 {
   int x = lexical_cast<int>("11");
@@ -54,17 +65,35 @@ int main()
     s5 = str1;
 
     string str3("Power Bomb");
-    assert(iends_with(str,"bomb"));
-    assert(!ends_with(str,"bomb"));
+//    assert(iends_with(str,"bomb"));
+//    assert(!ends_with(str,"bomb"));
+//
+//    assert(starts_with(str,"Pow"));
+//    assert(contains(str,"er"));
+//
+//    string str4 = to_lower_copy(str3);
+//    assert(iequals(str3,str4));
+//    string str5("power suit");
+//    assert(ilexicographical_compare(str3,str5));
+//    assert(all(str3.substr(0,5), is_lower()));
 
-    assert(starts_with(str,"Pow"));
-    assert(contains(str,"er"));
+    string str6("Link raise the master-sword");
+//    tokenizer<> tok(str6);
+//    for(auto& x1:tok){
+//        cout<<"["<<x1<<"]";
+//    }
 
-    string str4 = to_lower_copy(str3);
-    assert(iequals(str3,str4));
-    string str5("power suit");
-    assert(ilexicographical_compare(str3,str5));
-    assert(all(str3.substr(0,5), is_lower()));
+    char str7[]="Link ;; <master-sword> zelda";
+    char_separator<char> sep;
+    tokenizer<char_separator<char>, char*> tok(str7, str7+strlen(str7), sep);
+    my_print(tok);
+
+    tok.assign(str7, str7+strlen(str7),char_separator<char>(" ;-","<>"));
+    my_print(tok);
+
+    tok.assign(str7, str7+strlen(str7),char_separator<char>(" ;-<>","",keep_empty_tokens));
+    my_print(tok);
+
 
 }
 
