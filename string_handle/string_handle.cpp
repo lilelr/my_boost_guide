@@ -12,7 +12,9 @@ using namespace std;
 #include <boost/format.hpp>
 #include <boost/utility/string_ref.hpp>
 #include <boost/tokenizer.hpp>
+#include <boost/xpressive/xpressive_dynamic.hpp>
 using namespace boost::timer;
+using namespace boost::xpressive;
 using namespace boost;
 
 
@@ -83,17 +85,31 @@ int main()
 //        cout<<"["<<x1<<"]";
 //    }
 
-    char str7[]="Link ;; <master-sword> zelda";
-    char_separator<char> sep;
-    tokenizer<char_separator<char>, char*> tok(str7, str7+strlen(str7), sep);
-    my_print(tok);
+//    char str7[]="Link ;; <master-sword> zelda";
+//    char_separator<char> sep;
+//    tokenizer<char_separator<char>, char*> tok(str7, str7+strlen(str7), sep);
+//    my_print(tok);
+//
+//    tok.assign(str7, str7+strlen(str7),char_separator<char>(" ;-","<>"));
+//    my_print(tok);
+//
+//    tok.assign(str7, str7+strlen(str7),char_separator<char>(" ;-<>","",keep_empty_tokens));
+//    my_print(tok);
 
-    tok.assign(str7, str7+strlen(str7),char_separator<char>(" ;-","<>"));
-    my_print(tok);
+   char str8[] = "*Link*|| + Mario + || Zelda !!! | Metroid";
+    cregex reg = cregex::compile("\\w+",icase);
+    cregex_token_iterator pos(str8, str8+strlen(str8), reg);
+    for(;pos != cregex_token_iterator();++pos){
+        cout<<"["<<*pos<<"]"<<endl;
+    }
+    cout<<"end"<<endl;
+    cout<<endl;
 
-    tok.assign(str7, str7+strlen(str7),char_separator<char>(" ;-<>","",keep_empty_tokens));
-    my_print(tok);
-
-
+    cregex split_reg = cregex::compile("\\|\\|");
+    pos = cregex_token_iterator(str8,str8+strlen(str8), split_reg,-1);
+    for(;pos != cregex_token_iterator();++pos){
+        cout<<"["<<*pos<<"]";
+    }
+    cout<<endl;
 }
 
